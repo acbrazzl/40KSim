@@ -2,6 +2,7 @@ import argparse
 
 from update import update
 from unit import unit
+from data import data
 
 
 
@@ -11,6 +12,10 @@ def main(args):
     print("Updating...")
     update()
     print("Update Complete!")
+
+  loaded = data()
+
+  print(f"Loaded: {loaded.sheets.keys()}")
 
   print("Example of early combat")
   print("Loading Units")

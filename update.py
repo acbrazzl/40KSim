@@ -8,7 +8,7 @@ import requests
 cache_dir = "cache/"
 sources = [
 #"https://wahapedia.ru/wh40k9ed/the-rules/about/",
-"https://wahapedia.ru/wh40k9ed/Export%20Data%20Specs.xlsx",
+#"https://wahapedia.ru/wh40k9ed/Export%20Data%20Specs.xlsx",
 "http://wahapedia.ru/wh40k9ed/Factions.csv",
 "http://wahapedia.ru/wh40k9ed/Source.csv",
 "http://wahapedia.ru/wh40k9ed/Datasheets.csv",
@@ -38,7 +38,7 @@ def update():
        # urllib.request.urlretrieve(url, name)
         #(url, cache_dir + url.split("/")[-1])
 
-        r = requests.get(url, allow_redirects=False)
+        r = requests.get(url)
         open(name, 'wb').write(r.content)
        
 

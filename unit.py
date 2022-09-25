@@ -19,7 +19,9 @@ import random as rand
 #     "weapon": "lasgun"
 # }
 
-
+# from whapedia datasheet_models.csv:
+#datasheet_id|line|name|M|WS|BS|S|T|W|A|Ld|Sv|Cost|cost_description|models_per_unit|cost_including_wargear|base_size|base_size_descr|
+ #000000684|1|Guardsman|6"|4+|4+|3|3|1|1|6|5+|||9|true|25mm||
 
 #temp
 lasgun = {
