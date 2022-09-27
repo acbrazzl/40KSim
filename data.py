@@ -6,6 +6,7 @@
 # A data.sheet is a dict of datasheets
 # ...where key is sheet name and val is the sheet
 
+from lib2to3.pgen2.pgen import DFAState
 import pandas as pd
 from update import sources
 from update import cache_dir
@@ -18,7 +19,9 @@ def load_data():
         file_name = cache_dir + source.split("/")[-1]
         print(f"Reading {file_name}")
         #TODO: improve ability to read dirty data
-        sheets.update({file_name:pd.read_csv(file_name, error_bad_lines=False)})
+        df = pd.read_csv(file_name, sep = '|', engine = 'python')
+        df.drop(df.columns[df.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True) #error_bad_lines=False,
+        sheets.update({file_name:df}) 
     print("Data loaded!")
     return sheets
 
