@@ -19,8 +19,8 @@ def main(args):
 
   print("Example of early combat")
   print("Loading Units")
-  squad_one = unit("TODO Add File Handle Here!")
-  squad_two = unit("TODO Add File Handle Here!")
+  squad_one = unit("Guardsman")
+  squad_two = unit("Guardsman")
 
   print("Shooting!")
   squad_one.shoot(squad_two)

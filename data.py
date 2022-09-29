@@ -6,7 +6,6 @@
 # A data.sheet is a dict of datasheets
 # ...where key is sheet name and val is the sheet
 
-from lib2to3.pgen2.pgen import DFAState
 import pandas as pd
 from update import sources
 from update import cache_dir
@@ -26,10 +25,22 @@ def load_data():
     return sheets
 
 class data:
+    __instance = None
     sheets = {} # a dict of datasheets
-    
+    @staticmethod
+    def getData():
+        if data.__instance == None:
+            data()
+        return data.__instance
     def __init__(self):
-        
-        self.sheets = load_data()
+        if data.__instance != None:
+            raise Exception("Yo this is a singleton!")
+        else:
+            data.__instance = self
+            self.sheets = load_data()
+
+
+    
+  
 
     
