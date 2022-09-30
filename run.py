@@ -1,7 +1,7 @@
 import argparse
 
 from update import update
-from unit import unit
+from unit import model_shoot_stats, unit
 from data import data
 
 
@@ -19,11 +19,14 @@ def main(args):
 
   print("Example of early combat")
   print("Loading Units")
-  squad_one = unit("Guardsman")
-  squad_two = unit("Guardsman")
+  squad_one = unit("Guardsman") #TODO: load units from a unit list
+  squad_two = unit("Space Marine")
 
   print("Shooting!")
   squad_one.shoot(squad_two)
+
+  print("Shoot stats")
+  model_shoot_stats(squad_one,"lasgun",squad_two,12)
 
 if __name__ == "__main__":
     my_parser = argparse.ArgumentParser()

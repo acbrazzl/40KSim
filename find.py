@@ -7,7 +7,6 @@ from model import model
 
 #TODO: Turn into class and have functions receive the sheets from their initialization in main (run.py)
 
-#below was just cut from main() and would not work here until refactor
 def find_model(model_name):
   found_model = model
   for key in model:
@@ -26,11 +25,12 @@ def find_stat(model_name,stat):
   loaded = data.getData()
   print(f"Finding {stat}")
   df = loaded.sheets['cache/Datasheets_models.csv']
-  stat = df.iloc[df.loc[df['name'] == model_name].first_valid_index()][stat] #TODO: make this handle model stat types!
-  if stat is type(string):
-    stat = stat.strip("+")
+  val = df.iloc[df.loc[df['name'] == model_name].first_valid_index()][stat] #TODO: make this handle model stat types!
+  print(f"Found {stat}:{val}")
+  if type(val) is str:
+    val = val.strip("+")
    
-  return stat
+  return int(val)
 
 
  #for row in loaded.sheets['cache/Datasheets_models.csv']:

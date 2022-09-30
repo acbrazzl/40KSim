@@ -52,11 +52,47 @@ def model_shoot(models,weapon, target):
             if roll >= model["BS"]:
                 print("Hit!")
             else: print("Miss!")
-            #roll to wound
+            #roll to wound (all units have same toughness)
 
-            #target rolls save
+            #target rolls save #TODO: handle disperate saves
 
             #
+#compute stats: 
+#print average number of shots, hits, wounds, and deaths
+def model_shoot_stats(unit,weapon,target,distance):
+    for idx,model in enumerate(unit.models):
+        #compute shots
+        #TODO: handle pistol, rapid fire, assult, & heavy
+        #assume rapid
+        shots = num_shots("rapid",12) #TODO: handles this stuff vs mock
+        for shot in range(shots):
+            hit = 1 -  ((model["BS"] - 1) / 6) #TODO: check this...
+            stat = hit
+            print(f"Chance to hit: {hit}")
+            wound = to_wound(3,target.models[0]["T"]) / 6 #TODO: wound function for comparison of 2-6
+
+
+
+def num_shots(weapon_type, distance): #TODO: handle weapon types more accurately (from sheet)
+    if distance >=12:
+        shots = 2
+    else: shots = 1
+    return shots
+
+#returns the to-wound roll necessary given a weapon strength and target unit toughness
+def to_wound(strength, toughness):
+    #double strength wounds on 2+
+    #double toughness is wounded on a 6+
+    mod = strength / toughness
+    if mod >= 2: #ex: 8/4
+        return 2
+    elif mod > 1: #ex: 5/4
+        return 3
+    elif mod == 1: #ex 4/4
+        return 4
+    elif mod > 0.5: #ex 3/4
+        return 5
+    else: return 6 #ex 2/4
 
 
 class unit:
