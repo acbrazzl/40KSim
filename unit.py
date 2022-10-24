@@ -2,10 +2,13 @@
 ## Defines a unit.  A unit has models with model stats
 
 ## Units are loaded in from csv where they have a quantity of each model
-
+import logging
 import random as rand
 from find import find_model
 from model import model
+
+logger = logging.getLogger(__name__)
+logger.setLevel('INFO')
 
 
 # from whapedia datasheet_models.csv:
@@ -50,8 +53,8 @@ def model_shoot(models,weapon, target):
             #roll to hit
             roll  = rand.randint(1,6)
             if roll >= model["BS"]:
-                print("Hit!")
-            else: print("Miss!")
+                logger.info("Hit!")
+            else: logger.info("Miss!")
             #roll to wound (all units have same toughness)
 
             #target rolls save #TODO: handle disperate saves
@@ -68,7 +71,7 @@ def model_shoot_stats(unit,weapon,target,distance):
         for shot in range(shots):
             hit = 1 -  ((model["BS"] - 1) / 6) #TODO: check this...
             stat = hit
-            print(f"Chance to hit: {hit}")
+            logger.info(f"Chance to hit: {hit}")
             wound = to_wound(3,target.models[0]["T"]) / 6 #TODO: wound function for comparison of 2-6
 
 

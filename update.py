@@ -1,4 +1,5 @@
 
+import logging
 import os
 from pathlib import Path
 import requests
@@ -29,17 +30,21 @@ sources = [
 #"http://wahapedia.ru/wh40k9ed/Secondaries.csv",
 #"http://wahapedia.ru/wh40k9ed/Last_update.csv"
 
+logger = logging.getLogger(__name__)
+logger.setLevel('INFO')
+
 def update():
-    print("Updating!")
+    logger.info('Updating...')
     f = Path(cache_dir).mkdir(parents=True, exist_ok=True)
     for url in sources:
         name = cache_dir + url.split("/")[-1]
-        print(f"Attempting to DL {name} from {url}")
+        logger.info(f'Attempting to DL {name} from {url}')
        # urllib.request.urlretrieve(url, name)
         #(url, cache_dir + url.split("/")[-1])
 
         r = requests.get(url)
         open(name, 'wb').write(r.content)
+    logger.info('Update Complete!')
        
 
 

@@ -1,11 +1,16 @@
 #find stats from the loaded sheets to be used elsewhere...
-
+import logging
 import string
 from data import data
 from model import model
 
+logger = logging.getLogger(__name__)
+logger.setLevel('INFO')
+
 
 #TODO: Turn into class and have functions receive the sheets from their initialization in main (run.py)
+
+#***Changing prints to logger.info here breaks the ability to load from csv :( . INVESTIGATE!
 
 def find_model(model_name):
   found_model = model
@@ -13,20 +18,16 @@ def find_model(model_name):
     try:
       model[key] = find_stat(model_name,key)
     except:
-      print(f"No {key} associated with model") #TODO: populate weapons specially
+      logger.debug(f"No {key} associated with model") #TODO: populate weapons specially
 
   return found_model
-  
-  
- 
-
 
 def find_stat(model_name,stat):
   loaded = data.getData()
-  print(f"Finding {stat}")
+  logger.debug(f"Finding {stat}")
   df = loaded.sheets['cache/Datasheets_models.csv']
   val = df.iloc[df.loc[df['name'] == model_name].first_valid_index()][stat] #TODO: make this handle model stat types!
-  print(f"Found {stat}:{val}")
+  logger.debug(f"Found {stat}:{val}")
   if type(val) is str:
     val = val.strip("+")
    
